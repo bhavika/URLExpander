@@ -19,34 +19,14 @@ public class UrlExpander
         return resp;
     }
 
-    private Uri GetExpandedURL(Uri url)
-    {
-        try
-        {
-            string final_location = RequestActions(url).Headers["Location"].ToString();
-            Uri final_loc = new Uri(final_location);
-            return final_loc;
-        }
-        catch (System.UriFormatException ex)
-        {
-            Console.WriteLine("The entered short URL is invalid. Returning entered URL.");
-            return url;
-        }
-
-
-    }
-
     public Uri isTransitive(Uri url)
     {
         try
         {
             string newurl = RequestActions(url).Headers["Location"];
             Uri newuri = new Uri(newurl);
-
-            if (newurl.Equals(url))
-                return newuri;
-            else
-                return GetExpandedURL(newuri);
+            
+            return newuri;
         }
 
         catch (System.UriFormatException ex)
